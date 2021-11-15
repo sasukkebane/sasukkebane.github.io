@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" href="/favicon.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	
+
+		
+
+		<link rel="modulepreload" href="/_app/start-d0c526d4.js">
+		<link rel="modulepreload" href="/_app/chunks/vendor-3b367a9f.js">
+		<link rel="modulepreload" href="/_app/chunks/singletons-12a22614.js">
+		<link rel="modulepreload" href="/_app/pages/__layout.svelte-6b30f16d.js">
+		<link rel="modulepreload" href="/_app/pages/watch.svelte-4dc8c56c.js">
+		<link rel="modulepreload" href="/_app/chunks/shippuuden-87161c06.js">
+		<link rel="stylesheet" href="/_app/assets/start-61d1577b.css">
+		<link rel="stylesheet" href="/_app/assets/vendor-28d9e71a.css">
+		<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-a8373602.css">
+
+		<script type="module">
+			import { start } from "/_app/start-d0c526d4.js";
+			start({
+				target: document.querySelector("#svelte"),
+				paths: {"base":"","assets":""},
+				session: {},
+				host: location.host,
+				route: true,
+				spa: false,
+				trailing_slash: "never",
+				hydrate: {
+					status: 200,
+					error: null,
+					nodes: [
+						import("/_app/pages/__layout.svelte-6b30f16d.js"),
+						import("/_app/pages/watch.svelte-4dc8c56c.js")
+					],
+					page: {
+						host: location.host, // TODO this is redundant
+						path: "\u002Fwatch",
+						query: new URLSearchParams(""),
+						params: {}
+					}
+				}
+			});
+		</script>
+</head>
+
+<body>
+	<div id="svelte">
+
+
+<main><div class="mt-3 mx-auto text-center text-light"><div role="status" class="spinner-border"><span class="visually-hidden">Loading...</span></div></div>
+
+<div class="mt-3 mx-auto bg-dark text-light text-center p-2 rounded-3" style="max-width: 800px;" hidden><h5>Episódio 0</h5>
+    <h6>undefined</h6>
+
+    <video width="100%" height="100%" controls autoplay class="bg-black"><track kind="captions">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="pt-1 g-2 row">
+        <div class="col-sm-auto"><button class="w-100 btn btn-secondary" value="" style="">« 60 sec</button></div>
+        <div class="col-sm-auto"><button class="w-100 btn btn-secondary" value="" style="">‹ 10 sec</button></div>
+        <div class="col-sm-auto"><button class="w-100 btn btn-secondary" value="" style="">10 sec ›</button></div>
+        <div class="col-sm-auto"><button class="w-100 btn btn-secondary" value="" style="">1 min »</button></div>
+        <div class="col"><button class="w-100 btn btn-primary" value="" style="">Episódio 1 →</button></div></div>
+
+    <div class="mt-2 d-flex flex-wrap justify-content-center gap-2"><div class="form-check"><input placeholder="" class="form-check-input" id="HD" type="checkbox" name="" value="">
+  <label class="form-check-label" for="HD">HD</label></div>
+
+        <div class="form-check"><input placeholder="" class="form-check-input" id="Avanço automático" type="checkbox" name="" value="">
+  <label class="form-check-label" for="Avanço automático">Avanço automático</label></div>
+
+        <div class="form-check"><input placeholder="" class="form-check-input" id="Pular fillers" type="checkbox" name="" value="">
+  <label class="form-check-label" for="Pular fillers">Pular fillers</label></div>
+
+        
+        <div class="form-check"><input placeholder="" class="form-check-input" id="Pular últimos 2 minutos" type="checkbox" name="" value="">
+  <label class="form-check-label" for="Pular últimos 2 minutos">Pular últimos 2 minutos</label></div>
+</div>
+    <a class="small text-center" href="/">Voltar ao índice</a>
+</div></main>
+
+
+
+			
+		</div>
+</body>
+
+</html>
