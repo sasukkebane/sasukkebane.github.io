@@ -2,13 +2,12 @@
     import { Spinner, Row, Col, Button, Input, FormGroup } from "sveltestrap";
     import { page } from "$app/stores";
     import {
+        getEpisodesUrls,
         getEpisodeUrl,
         getEpisodeTitle,
+        getEpisodeTimestamps,
         getNextNonFiller,
         isFillerTitle,
-        // getOpeningStart,
-        // getOpeningDuration,
-        getEndingDuration,
     } from "$lib/dattebane/shippuuden";
     import { goto } from "$app/navigation";
     import { onMount } from "svelte";
@@ -22,14 +21,16 @@
     $: hd = $page.query.get("hd") == "true";
     $: autoNext = $page.query.get("autoNext") == "true";
     $: skipFiller = $page.query.get("skipFiller") == "true";
-    // $: skipOpening = $page.query.get("skipOpening") == "true";
+    $: skipOpening = $page.query.get("skipOpening") == "true";
     $: skipEnding = $page.query.get("skipEnding") == "true";
 
+    let urls = {};
+    $: episodeUrl = getEpisodeUrl(episode, hd, urls);
     $: episodeTitle = getEpisodeTitle(episode);
-    $: episodeUrl = getEpisodeUrl(episode, hd);
-    // $: openingStart = getOpeningStart(episode);
-    // $: openingEnd = openingStart + getOpeningDuration(episode);
-    $: endingStart = videoDuration - getEndingDuration(episode);
+    $: episodeTimestamps = getEpisodeTimestamps(episode);
+    $: openingStart = episodeTimestamps.openning_start;
+    $: openingEnd = episodeTimestamps.openning_end;
+    $: endingStart = episodeTimestamps.ending_start;
 
     function gotoOverriding(name, value) {
         const params = new URLSearchParams($page.query);
@@ -44,26 +45,27 @@
             gotoOverriding("episode", next);
         }
 
-        // if (
-        //     skipOpening &&
-        //     openingStart !== undefined &&
-        //     openingEnd !== undefined
-        // ) {
-        //     if (videoCurrentTime >= openingStart) {
-        //         if (videoCurrentTime <= openingEnd) {
-        //             console.log("Auto-skipped openning");
-        //             videoCurrentTime = openingEnd + 0.01;
-        //         }
-        //     }
-        // }
+        if (
+            skipOpening &&
+            openingStart !== undefined &&
+            openingEnd !== undefined
+        ) {
+            if (
+                videoCurrentTime >= openingStart - 0.3 &&
+                videoCurrentTime < openingEnd
+            ) {
+                console.log("Auto-skipped openning");
+                videoCurrentTime = openingEnd + 0.01;
+            }
+        }
         if (skipEnding && endingStart !== undefined) {
-            if (videoCurrentTime >= endingStart) {
+            if (videoCurrentTime >= endingStart - 0.3) {
                 console.log("Auto-skipped ending");
                 videoCurrentTime = videoDuration;
             }
         }
         if (autoNext && episode < 500) {
-            if (videoCurrentTime >= videoDuration - 0.01) {
+            if (videoCurrentTime >= videoDuration) {
                 const next = skipFiller
                     ? getNextNonFiller(episode)
                     : episode + 1;
@@ -73,16 +75,18 @@
         }
     }
 
-    onMount(() => {
+    onMount(async () => {
         const params = new URLSearchParams($page.query);
         if (!params.has("episode")) params.set("episode", 1);
         if (!params.has("hd")) params.set("hd", true);
         if (!params.has("autoNext")) params.set("autoNext", true);
         if (!params.has("skipFiller")) params.set("skipFiller", true);
-        // if (!params.has("skipOpening")) params.set("skipOpening", true);
+        if (!params.has("skipOpening")) params.set("skipOpening", true);
         if (!params.has("skipEnding")) params.set("skipEnding", true);
         if (params.toString() != $page.query.toString())
             goto("/watch?" + params.toString());
+
+        urls = await getEpisodesUrls();
         loaded = true;
     });
 </script>
@@ -185,34 +189,35 @@
         />
         <Input
             type="checkbox"
-            label="Avanço automático"
-            bind:checked={autoNext}
-            on:change={() => {
-                gotoOverriding("autoNext", !autoNext);
-            }}
-        />
-        <Input
-            type="checkbox"
             label="Pular fillers"
             bind:checked={skipFiller}
             on:change={() => {
                 gotoOverriding("skipFiller", !skipFiller);
             }}
         />
-        <!-- <Input
+        <Input
             type="checkbox"
             label="Pular abertura"
             bind:checked={skipOpening}
             on:change={() => {
                 gotoOverriding("skipOpening", !skipOpening);
             }}
-        /> -->
+        />
         <Input
             type="checkbox"
-            label="Pular últimos 2 minutos"
+            label="Pular encerramento"
             bind:checked={skipEnding}
             on:change={() => {
                 gotoOverriding("skipEnding", !skipEnding);
+            }}
+        />
+        <Input
+            type="checkbox"
+            label="Avanço automático"
+            title="Avançar para o próximo episódio quando chegar no final"
+            bind:checked={autoNext}
+            on:change={() => {
+                gotoOverriding("autoNext", !autoNext);
             }}
         />
     </div>

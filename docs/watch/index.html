@@ -11,18 +11,18 @@
 
 		
 
-		<link rel="modulepreload" href="/_app/start-d0c526d4.js">
+		<link rel="modulepreload" href="/_app/start-8a00abd2.js">
 		<link rel="modulepreload" href="/_app/chunks/vendor-3b367a9f.js">
 		<link rel="modulepreload" href="/_app/chunks/singletons-12a22614.js">
 		<link rel="modulepreload" href="/_app/pages/__layout.svelte-6b30f16d.js">
-		<link rel="modulepreload" href="/_app/pages/watch.svelte-4dc8c56c.js">
-		<link rel="modulepreload" href="/_app/chunks/shippuuden-87161c06.js">
+		<link rel="modulepreload" href="/_app/pages/watch.svelte-d66800d9.js">
+		<link rel="modulepreload" href="/_app/chunks/shippuuden-96e8900e.js">
 		<link rel="stylesheet" href="/_app/assets/start-61d1577b.css">
 		<link rel="stylesheet" href="/_app/assets/vendor-28d9e71a.css">
 		<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-a8373602.css">
 
 		<script type="module">
-			import { start } from "/_app/start-d0c526d4.js";
+			import { start } from "/_app/start-8a00abd2.js";
 			start({
 				target: document.querySelector("#svelte"),
 				paths: {"base":"","assets":""},
@@ -36,7 +36,7 @@
 					error: null,
 					nodes: [
 						import("/_app/pages/__layout.svelte-6b30f16d.js"),
-						import("/_app/pages/watch.svelte-4dc8c56c.js")
+						import("/_app/pages/watch.svelte-d66800d9.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
@@ -72,15 +72,17 @@
     <div class="mt-2 d-flex flex-wrap justify-content-center gap-2"><div class="form-check"><input placeholder="" class="form-check-input" id="HD" type="checkbox" name="" value="">
   <label class="form-check-label" for="HD">HD</label></div>
 
-        <div class="form-check"><input placeholder="" class="form-check-input" id="Avanço automático" type="checkbox" name="" value="">
-  <label class="form-check-label" for="Avanço automático">Avanço automático</label></div>
-
         <div class="form-check"><input placeholder="" class="form-check-input" id="Pular fillers" type="checkbox" name="" value="">
   <label class="form-check-label" for="Pular fillers">Pular fillers</label></div>
 
-        
-        <div class="form-check"><input placeholder="" class="form-check-input" id="Pular últimos 2 minutos" type="checkbox" name="" value="">
-  <label class="form-check-label" for="Pular últimos 2 minutos">Pular últimos 2 minutos</label></div>
+        <div class="form-check"><input placeholder="" class="form-check-input" id="Pular abertura" type="checkbox" name="" value="">
+  <label class="form-check-label" for="Pular abertura">Pular abertura</label></div>
+
+        <div class="form-check"><input placeholder="" class="form-check-input" id="Pular encerramento" type="checkbox" name="" value="">
+  <label class="form-check-label" for="Pular encerramento">Pular encerramento</label></div>
+
+        <div class="form-check"><input title="Avançar para o próximo episódio quando chegar no final" placeholder="" class="form-check-input" id="Avanço automático" type="checkbox" name="" value="">
+  <label class="form-check-label" for="Avanço automático">Avanço automático</label></div>
 </div>
     <a class="small text-center" href="/">Voltar ao índice</a>
 </div></main>
